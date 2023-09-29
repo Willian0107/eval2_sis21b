@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.red),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Backend Cloud Firestore'),
+      home: const MyHomePage(title: 'CATEGORIAS'),
     );
   }
 }
