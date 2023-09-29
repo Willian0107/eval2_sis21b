@@ -114,9 +114,15 @@ class MyForm extends StatelessWidget {
             ],
           ),
           SizedBox(height: 16),
-          ElevatedButton(
-            onPressed: _guardarDatos,
-            child: Text('Guardar'),
+          Container(
+            constraints: BoxConstraints.expand(height: 60),
+            child: ElevatedButton(
+              onPressed: _guardarDatos,
+              child: Text(
+                'Guardar',
+                style: TextStyle(fontSize: 24), // Tamaño del texto del botón
+              ),
+            ),
           ),
         ],
       ),
