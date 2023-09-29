@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Crud Firebase',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.red),
         useMaterial3: true,
       ),
       home: const MyHomePage(title: 'Backend Cloud Firestore'),
@@ -42,25 +42,29 @@ class MyForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        TextFormField(
-          controller: idController,
-          decoration: InputDecoration(labelText: 'ID'),
-        ),
-        TextFormField(
-          controller: estadoController,
-          decoration: InputDecoration(labelText: 'Estado'),
-        ),
-        TextFormField(
-          controller: nombreController,
-          decoration: InputDecoration(labelText: 'Nombre'),
-        ),
-        ElevatedButton(
-          onPressed: _guardarDatos, // Llama a la función para guardar los datos
-          child: Text('Guardar'),
-        ),
-      ],
+    return Padding(
+      padding: EdgeInsets.all(
+          MediaQuery.of(context).size.width * 0.2), // Agrega un padding del 20%
+      child: Column(
+        children: [
+          TextFormField(
+            controller: idController,
+            decoration: InputDecoration(labelText: 'ID'),
+          ),
+          TextFormField(
+            controller: estadoController,
+            decoration: InputDecoration(labelText: 'Estado'),
+          ),
+          TextFormField(
+            controller: nombreController,
+            decoration: InputDecoration(labelText: 'Nombre'),
+          ),
+          ElevatedButton(
+            onPressed: _guardarDatos,
+            child: Text('Guardar'),
+          ),
+        ],
+      ),
     );
   }
 }
