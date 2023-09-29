@@ -1,6 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart'; // Importa el paquete Firestore
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'pages/lista_registros.dart';
 
 void main() {
@@ -29,13 +29,21 @@ class MyApp extends StatelessWidget {
 
 class MyForm extends StatelessWidget {
   final TextEditingController idController = TextEditingController();
-  final TextEditingController estadoController = TextEditingController();
+  final ValueNotifier<bool> activoCheckbox = ValueNotifier<bool>(false);
+  final ValueNotifier<bool> inactivoCheckbox = ValueNotifier<bool>(false);
   final TextEditingController nombreController = TextEditingController();
 
   void _guardarDatos() {
+    var estado;
+    if (activoCheckbox.value) {
+      estado = 'Activo';
+    } else if (inactivoCheckbox.value) {
+      estado = 'Inactivo';
+    }
+
     FirebaseFirestore.instance.collection('tb-categoria').add({
       'id': idController.text,
-      'estado': estadoController.text,
+      'estado': estado,
       'nombre': nombreController.text,
     });
   }
@@ -43,22 +51,70 @@ class MyForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(
-          MediaQuery.of(context).size.width * 0.2), // Agrega un padding del 20%
+      padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.2),
       child: Column(
         children: [
-          TextFormField(
-            controller: idController,
-            decoration: InputDecoration(labelText: 'ID'),
+          Row(
+            children: [
+              Icon(Icons.perm_identity),
+              SizedBox(width: 8),
+              Expanded(
+                child: TextFormField(
+                  controller: idController,
+                  decoration: InputDecoration(labelText: 'ID'),
+                ),
+              ),
+            ],
           ),
-          TextFormField(
-            controller: estadoController,
-            decoration: InputDecoration(labelText: 'Estado'),
+          SizedBox(height: 16),
+          Row(
+            children: [
+              ValueListenableBuilder<bool>(
+                valueListenable: activoCheckbox,
+                builder: (context, value, child) {
+                  return Checkbox(
+                    value: value,
+                    onChanged: (newValue) {
+                      activoCheckbox.value = newValue!;
+                      if (newValue) {
+                        inactivoCheckbox.value = false;
+                      }
+                    },
+                  );
+                },
+              ),
+              Text('Activo'),
+              ValueListenableBuilder<bool>(
+                valueListenable: inactivoCheckbox,
+                builder: (context, value, child) {
+                  return Checkbox(
+                    value: value,
+                    onChanged: (newValue) {
+                      inactivoCheckbox.value = newValue!;
+                      if (newValue) {
+                        activoCheckbox.value = false;
+                      }
+                    },
+                  );
+                },
+              ),
+              Text('Inactivo'),
+            ],
           ),
-          TextFormField(
-            controller: nombreController,
-            decoration: InputDecoration(labelText: 'Nombre'),
+          SizedBox(height: 16),
+          Row(
+            children: [
+              Icon(Icons.person),
+              SizedBox(width: 8),
+              Expanded(
+                child: TextFormField(
+                  controller: nombreController,
+                  decoration: InputDecoration(labelText: 'Nombre'),
+                ),
+              ),
+            ],
           ),
+          SizedBox(height: 16),
           ElevatedButton(
             onPressed: _guardarDatos,
             child: Text('Guardar'),
@@ -92,7 +148,7 @@ class _MyHomePageState extends State<MyHomePage> {
             MyForm(),
             SizedBox(height: 20),
             Expanded(
-              child: ListaRegistros(), // Usa la vista de los registros aquí
+              child: ListaRegistros(),
             ),
           ],
         ),
