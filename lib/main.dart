@@ -45,6 +45,12 @@ class MyForm extends StatelessWidget {
       'estado': estado,
       'nombre': nombreController.text,
     });
+
+    // Resetear los controladores después de guardar
+    idController.clear();
+    activoCheckbox.value = false;
+    inactivoCheckbox.value = false;
+    nombreController.clear();
   }
 
   @override
@@ -121,7 +127,7 @@ class MyForm extends StatelessWidget {
                 onPressed: _guardarDatos,
                 child: Text(
                   'Guardar',
-                  style: TextStyle(fontSize: 24), // Tamaño del texto del botón
+                  style: TextStyle(fontSize: 24),
                 ),
               ),
             ),
