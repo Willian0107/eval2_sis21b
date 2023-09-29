@@ -49,82 +49,84 @@ class MyForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.2),
-      child: Column(
-        children: [
-          Row(
-            children: [
-              Icon(Icons.perm_identity),
-              SizedBox(width: 8),
-              Expanded(
-                child: TextFormField(
-                  controller: idController,
-                  decoration: InputDecoration(labelText: 'ID'),
+    return SingleChildScrollView(
+      child: Padding(
+        padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.2),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Icon(Icons.perm_identity),
+                SizedBox(width: 8),
+                Expanded(
+                  child: TextFormField(
+                    controller: idController,
+                    decoration: InputDecoration(labelText: 'ID'),
+                  ),
                 ),
-              ),
-            ],
-          ),
-          SizedBox(height: 16),
-          Row(
-            children: [
-              ValueListenableBuilder<bool>(
-                valueListenable: activoCheckbox,
-                builder: (context, value, child) {
-                  return Checkbox(
-                    value: value,
-                    onChanged: (newValue) {
-                      activoCheckbox.value = newValue!;
-                      if (newValue) {
-                        inactivoCheckbox.value = false;
-                      }
-                    },
-                  );
-                },
-              ),
-              Text('Activo'),
-              ValueListenableBuilder<bool>(
-                valueListenable: inactivoCheckbox,
-                builder: (context, value, child) {
-                  return Checkbox(
-                    value: value,
-                    onChanged: (newValue) {
-                      inactivoCheckbox.value = newValue!;
-                      if (newValue) {
-                        activoCheckbox.value = false;
-                      }
-                    },
-                  );
-                },
-              ),
-              Text('Inactivo'),
-            ],
-          ),
-          SizedBox(height: 16),
-          Row(
-            children: [
-              Icon(Icons.person),
-              SizedBox(width: 8),
-              Expanded(
-                child: TextFormField(
-                  controller: nombreController,
-                  decoration: InputDecoration(labelText: 'Nombre'),
+              ],
+            ),
+            SizedBox(height: 16),
+            Row(
+              children: [
+                ValueListenableBuilder<bool>(
+                  valueListenable: activoCheckbox,
+                  builder: (context, value, child) {
+                    return Checkbox(
+                      value: value,
+                      onChanged: (newValue) {
+                        activoCheckbox.value = newValue!;
+                        if (newValue) {
+                          inactivoCheckbox.value = false;
+                        }
+                      },
+                    );
+                  },
                 ),
-              ),
-            ],
-          ),
-          SizedBox(height: 16),
-          Container(
-            constraints: BoxConstraints.expand(height: 60),
-            child: ElevatedButton(
-              onPressed: _guardarDatos,
-              child: Text(
-                'Guardar',
-                style: TextStyle(fontSize: 24), // Tamaño del texto del botón
+                Text('Activo'),
+                ValueListenableBuilder<bool>(
+                  valueListenable: inactivoCheckbox,
+                  builder: (context, value, child) {
+                    return Checkbox(
+                      value: value,
+                      onChanged: (newValue) {
+                        inactivoCheckbox.value = newValue!;
+                        if (newValue) {
+                          activoCheckbox.value = false;
+                        }
+                      },
+                    );
+                  },
+                ),
+                Text('Inactivo'),
+              ],
+            ),
+            SizedBox(height: 16),
+            Row(
+              children: [
+                Icon(Icons.person),
+                SizedBox(width: 8),
+                Expanded(
+                  child: TextFormField(
+                    controller: nombreController,
+                    decoration: InputDecoration(labelText: 'Nombre'),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 16),
+            Container(
+              constraints: BoxConstraints.expand(height: 60),
+              child: ElevatedButton(
+                onPressed: _guardarDatos,
+                child: Text(
+                  'Guardar',
+                  style: TextStyle(fontSize: 24), // Tamaño del texto del botón
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -146,16 +148,16 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            MyForm(),
-            SizedBox(height: 20),
-            Expanded(
-              child: ListaRegistros(),
-            ),
-          ],
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              MyForm(),
+              SizedBox(height: 20),
+              ListaRegistros(),
+            ],
+          ),
         ),
       ),
     );
