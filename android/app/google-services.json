@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "270373524590",
+    "project_id": "dbdemo21b-9a0f9",
+    "storage_bucket": "dbdemo21b-9a0f9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:270373524590:android:bd89973fb9431d957ac27f",
+        "android_client_info": {
+          "package_name": "com.sear.demo2_firebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "270373524590-0cjs0nja0irfkd60pnpqd2labkk8ldmu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCixdKlq8TCxQj7dqVlsYaLx37sUiOL6F8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "270373524590-0cjs0nja0irfkd60pnpqd2labkk8ldmu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
